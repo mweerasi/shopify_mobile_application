@@ -3,29 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="manju.shopify_mobile_application.MainActivity">
+    tools:context="manju.shopify_mobile_application.MainActivity"
+    android:background="#3fb399">
 
     <TextView
         android:id="@+id/napoleon_spent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="napoleon_spent"
+        android:text="no internet connection"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="120dp"
-        android:layout_above="@+id/textView4"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="126dp" />
+        android:textSize="30dp"/>
 
     <TextView
         android:id="@+id/number_of_ABB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="number_of_ABB"
+        android:text="no internet connection"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="299dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
-        android:layout_alignTop="@+id/textView4" />
+        android:textSize="30dp"/>
 
     <TextView
         android:id="@+id/textView3"
@@ -34,9 +37,9 @@
         android:text="CAD spent by Napoleon Batz"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="84dp"
-        android:layout_marginBottom="41dp"
-        android:layout_above="@+id/napoleon_spent"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/textView4"
@@ -45,7 +48,7 @@
         android:text="# of Awesome Bronze Bags sold"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="270dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="200dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="184dp" />
+        android:textSize="20dp"/>
 </RelativeLayout>

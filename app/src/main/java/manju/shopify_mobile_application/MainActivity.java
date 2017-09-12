@@ -3,17 +3,8 @@ package manju.shopify_mobile_application;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.TextView;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import java.util.Collections;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,13 +12,15 @@ import retrofit2.Callback;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    private String napoleonSpent = "";
+    private String napoleonSpent = "0";
     private int numberOfABB = 0;
     TextView napoleonTextView;
     TextView brownBagsTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //remove notification bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         //fetch the data and update TextViews
@@ -40,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    //implement retrofit to retrive the json and parse with Gson
+    //implement retrofit to retrieve the json and parse with Gson
     public void fetchSpotifyData(){
-        String url = "https://shopicruit.myshopify.com/admin/orders.json?page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6";
+        //url = "https://shopicruit.myshopify.com/admin/orders.json?page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6"
         ((MobileApplication)getApplicationContext()).getShopifyRestClient().getApi().getOrders("1", "c32313df0d0ef512ca64d5b336a0d7c6").enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, retrofit2.Response<OrderResponse> response) {
@@ -59,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                     if (response.body().orders.get(i).lineItems != null) {
                         for (int j = 0; j < response.body().orders.get(i).lineItems.size(); j++) {
                             if (response.body().orders.get(i).lineItems.get(j).productId == 2759139395L) { //Bronze Bag's product ID?
-                                numberOfABB++;
+                                numberOfABB+= response.body().orders.get(i).lineItems.get(j).quantity;
                             }
                         }
                     }
