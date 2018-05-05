@@ -1,4 +1,4 @@
-package manju.shopify_mobile_application;
+package manju.shopify_mobile_application.Parsers;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Manju on 2017-09-11.
  */
 
-class LineItem {
+public class LineItem {
     @SerializedName("id")
     @Expose
     public long id;

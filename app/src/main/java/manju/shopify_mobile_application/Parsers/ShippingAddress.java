@@ -1,4 +1,4 @@
-package manju.shopify_mobile_application;
+package manju.shopify_mobile_application.Parsers;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Manju on 2017-09-11.
  */
 
-class ShippingAddress {
+public class ShippingAddress {
     @SerializedName("first_name")
     @Expose
     public String firstName;

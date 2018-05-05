@@ -1,4 +1,4 @@
-package manju.shopify_mobile_application;
+package manju.shopify_mobile_application.Parsers;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -194,6 +194,4 @@ public class Order {
     public String getEmail() {
         return email;
     }
-
-
 }
