@@ -1,4 +1,4 @@
-package manju.shopify_mobile_application;
+package manju.shopify_mobile_application.Parsers;
 
 import java.util.List;
 

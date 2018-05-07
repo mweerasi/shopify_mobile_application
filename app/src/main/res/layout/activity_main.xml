@@ -10,25 +10,25 @@
         android:id="@+id/napoleon_spent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="no internet connection"
+        android:text="@string/no_internet"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="120dp"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true"
-        android:textSize="30dp"/>
+        android:textSize="30sp"/>
 
     <TextView
         android:id="@+id/number_of_ABB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="no internet connection"
+        android:text="@string/no_internet"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="299dp"
         android:layout_marginTop="20dp"
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
-        android:textSize="30dp"/>
+        android:textSize="30sp"/>
 
     <TextView
         android:id="@+id/textView3"
@@ -39,16 +39,17 @@
         tools:layout_editor_absoluteY="84dp"
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
-        android:textSize="20dp"/>
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="# of Awesome Bronze Bags sold"
+        android:text="@string/monthly_text"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="270dp"
         android:layout_marginTop="200dp"
         android:layout_centerHorizontal="true"
-        android:textSize="20dp"/>
+        android:textSize="20sp"/>
+
 </RelativeLayout>
