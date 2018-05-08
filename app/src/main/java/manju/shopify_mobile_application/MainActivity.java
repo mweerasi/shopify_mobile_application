@@ -44,9 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 new RecyclerItemClickListener(getApplicationContext(), list, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent myIntent = new Intent(MainActivity.this, ProvinceActivity.class);
-                        myIntent.putExtra("orders", ordersMap);
-                        MainActivity.this.startActivity(myIntent);
+                        if (position == 0) {
+                            Intent myIntent = new Intent(MainActivity.this, ProvinceActivity.class);
+                            myIntent.putExtra("orders", ordersMap);
+                            MainActivity.this.startActivity(myIntent);
+                        }
                     }
 
                     @Override
