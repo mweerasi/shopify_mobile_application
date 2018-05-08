@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,14 +41,17 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(ordersAdapter);
 
         list.addOnItemTouchListener(
-                new RecyclerItemClickListener(getApplicationContext(), list ,new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
+                new RecyclerItemClickListener(getApplicationContext(), list, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
                         Intent myIntent = new Intent(MainActivity.this, ProvinceActivity.class);
                         myIntent.putExtra("orders", ordersMap);
                         MainActivity.this.startActivity(myIntent);
                     }
 
-                    @Override public void onLongItemClick(View view, int position) { }
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                    }
                 })
         );
     }

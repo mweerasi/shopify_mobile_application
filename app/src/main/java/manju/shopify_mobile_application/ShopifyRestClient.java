@@ -11,8 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ShopifyRestClient {
-    private static ShopifyRestClient instance;
     private static final String baseURL = "https://shopicruit.myshopify.com/admin/";
+    private static ShopifyRestClient instance;
     private String accessToken;
     private ShopifyAPI api;
     private Gson gson;

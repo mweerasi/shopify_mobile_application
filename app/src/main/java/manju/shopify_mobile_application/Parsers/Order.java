@@ -196,10 +196,10 @@ public class Order implements Serializable {
         return email;
     }
 
-    public int getYear(){
+    public int getYear() {
         try {
-            return Integer.parseInt(createdAt.substring(0,4));
-        } catch (Exception e){
+            return Integer.parseInt(createdAt.substring(0, 4));
+        } catch (Exception e) {
             return 0;
         }
     }

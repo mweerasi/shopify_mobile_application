@@ -53,7 +53,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.BaseHolder
         data.add("Orders By Year");
         for (Map.Entry<Integer, List<Order>> year : yearMap.entrySet()) {
             data.add(String.format("\t %d orders from %d", year.getValue().size(), year.getKey()));
-            for (int i = 0; i < Math.min(10, year.getValue().size()); i++){
+            for (int i = 0; i < Math.min(10, year.getValue().size()); i++) {
                 data.add(String.format("\t\t - Order ID: %d", year.getValue().get(i).id));
                 counter++;
             }
