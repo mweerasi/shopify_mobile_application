@@ -2,4 +2,6 @@
     <string name="app_name">shopify_mobile_application</string>
     <string name="monthly_text">list of months</string>
     <string name="no_internet">no internet connection</string>
+    <string name="title_activity_main">Order Summary</string>
+    <string name="title_activity_province">Province Summary</string>
 </resources>

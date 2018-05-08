@@ -1,65 +1,102 @@
 package manju.shopify_mobile_application;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.WindowManager;
-import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeMap;
+
+import manju.shopify_mobile_application.Adapters.OrdersAdapter;
+import manju.shopify_mobile_application.Helpers.RecyclerItemClickListener;
+import manju.shopify_mobile_application.Parsers.Order;
 import manju.shopify_mobile_application.Parsers.OrderResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    private String napoleonSpent = "0";
-    private int numberOfABB = 0;
-    TextView napoleonTextView;
-    TextView brownBagsTextView;
+    private RecyclerView list;
+    private OrdersAdapter ordersAdapter = new OrdersAdapter();
+    private TreeMap<String, List<Order>> ordersMap = new TreeMap<>();
+    private TreeMap<Integer, List<Order>> yearMap = new TreeMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //remove notification bar
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-        //fetch the data and update TextViews
-        fetchSpotifyData();
-        napoleonTextView = (TextView) findViewById(R.id.napoleon_spent);
-        brownBagsTextView = (TextView) findViewById(R.id.number_of_ABB);
-        napoleonTextView.setText(napoleonSpent);
-        brownBagsTextView.setText(Integer.toString(numberOfABB));
+        fetchShopifyData();
+        list = (RecyclerView) findViewById(R.id.list_view);
+        list.setLayoutManager(new LinearLayoutManager(this));
+        ordersAdapter = new OrdersAdapter();
+        list.setAdapter(ordersAdapter);
+
+        list.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), list ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        Intent myIntent = new Intent(MainActivity.this, ProvinceActivity.class);
+                        myIntent.putExtra("orders", ordersMap);
+                        MainActivity.this.startActivity(myIntent);
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) { }
+                })
+        );
     }
 
 
-
-    //implement retrofit to retrieve the json and parse with Gson
-    public void fetchSpotifyData(){
+    public void fetchShopifyData() {
         //url = "https://shopicruit.myshopify.com/admin/orders.json?page=1&access_token=c32313df0d0ef512ca64d5b336a0d7c6"
-        ((MobileApplication)getApplicationContext()).getShopifyRestClient().getApi().getOrders("1", "c32313df0d0ef512ca64d5b336a0d7c6").enqueue(new Callback<OrderResponse>() {
+
+        ShopifyRestClient.getInstance().getApi().getOrders("1", "c32313df0d0ef512ca64d5b336a0d7c6").enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, retrofit2.Response<OrderResponse> response) {
                 //response.body() = list of Orders
-                Log.d(TAG, response.toString());
-                for(int i = 0; i < response.body().orders.size(); i++) {
-                    if (response.body().orders.get(i).customer != null) {
-                        Log.d(TAG, Long.toString(response.body().orders.get(i).customer.getId()));
-                        if (response.body().orders.get(i).customer.getId() == 4953626051L) { //Napoleon's customer ID?
-                            Log.d(TAG, response.body().orders.get(i).customer.getTotalSpent() + " total spent");
-                            napoleonSpent = response.body().orders.get(i).customer.getTotalSpent();
-                        }
+                List<Order> orders = response.body().orders;
+
+                // sort the orders by province
+                Collections.sort(orders, new Comparator<Order>() {
+                    @Override
+                    public int compare(Order o1, Order o2) {
+                        String p1 = o1.billingAddress != null ? o1.billingAddress.province : "Unspecified";
+                        String p2 = o2.billingAddress != null ? o2.billingAddress.province : "Unspecified";
+                        return p1.compareToIgnoreCase(p2);
                     }
-                    if (response.body().orders.get(i).lineItems != null) {
-                        for (int j = 0; j < response.body().orders.get(i).lineItems.size(); j++) {
-                            if (response.body().orders.get(i).lineItems.get(j).productId == 2759139395L) { //Bronze Bag's product ID?
-                                numberOfABB+= response.body().orders.get(i).lineItems.get(j).quantity;
-                            }
-                        }
+                });
+
+                for (Order order : orders) {
+                    String p1 = order.billingAddress != null ? order.billingAddress.province : "Unspecified";
+                    if (!ordersMap.containsKey(p1)) {
+                        ordersMap.put(p1, new ArrayList<Order>());
                     }
+                    ordersMap.get(p1).add(order);
                 }
-                napoleonTextView.setText("$" + napoleonSpent);
-                brownBagsTextView.setText(Integer.toString(numberOfABB));
+
+                Collections.sort(orders, new Comparator<Order>() {
+                    @Override
+                    public int compare(Order o1, Order o2) {
+                        return o2.getYear() - o1.getYear();
+                    }
+                });
+
+                for (Order order : orders) {
+                    if (!yearMap.containsKey(order.getYear())) {
+                        yearMap.put(order.getYear(), new ArrayList<Order>());
+                    }
+                    yearMap.get(order.getYear()).add(order);
+                }
+
+                ordersAdapter.updateOrderList(ordersMap, yearMap);
             }
 
             @Override
