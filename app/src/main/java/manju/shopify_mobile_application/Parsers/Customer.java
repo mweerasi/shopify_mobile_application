@@ -3,11 +3,13 @@ package manju.shopify_mobile_application.Parsers;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Manju on 2017-09-11.
  */
 
-public class Customer {
+public class Customer implements Serializable {
     @SerializedName("id")
     @Expose
     public long id;

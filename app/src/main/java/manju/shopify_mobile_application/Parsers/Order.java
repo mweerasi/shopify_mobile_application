@@ -3,13 +3,14 @@ package manju.shopify_mobile_application.Parsers;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Manju on 2017-09-11.
  */
 
-public class Order {
+public class Order implements Serializable {
     @SerializedName("id")
     @Expose
     public long id;
@@ -193,5 +194,13 @@ public class Order {
 
     public String getEmail() {
         return email;
+    }
+
+    public int getYear() {
+        try {
+            return Integer.parseInt(createdAt.substring(0, 4));
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }
