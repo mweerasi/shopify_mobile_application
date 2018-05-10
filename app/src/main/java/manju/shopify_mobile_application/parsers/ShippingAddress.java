@@ -1,4 +1,4 @@
-package manju.shopify_mobile_application.Parsers;
+package manju.shopify_mobile_application.parsers;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by Manju on 2017-09-11.
  */
 
-public class BillingAddress implements Serializable {
+public class ShippingAddress implements Serializable {
     @SerializedName("first_name")
     @Expose
     public String firstName;
@@ -27,7 +27,7 @@ public class BillingAddress implements Serializable {
     public String zip;
     @SerializedName("province")
     @Expose
-    public String province = "Unspecified";
+    public String province;
     @SerializedName("country")
     @Expose
     public String country;

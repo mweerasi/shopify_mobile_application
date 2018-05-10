@@ -1,4 +1,4 @@
-package manju.shopify_mobile_application.Adapters;
+package manju.shopify_mobile_application.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import manju.shopify_mobile_application.Parsers.Order;
+import manju.shopify_mobile_application.parsers.Order;
 import manju.shopify_mobile_application.R;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.BaseHolder> {

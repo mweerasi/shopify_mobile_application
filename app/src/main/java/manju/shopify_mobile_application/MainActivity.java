@@ -14,10 +14,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
 
-import manju.shopify_mobile_application.Adapters.OrdersAdapter;
-import manju.shopify_mobile_application.Helpers.RecyclerItemClickListener;
-import manju.shopify_mobile_application.Parsers.Order;
-import manju.shopify_mobile_application.Parsers.OrderResponse;
+import manju.shopify_mobile_application.adapters.OrdersAdapter;
+import manju.shopify_mobile_application.helpers.RecyclerItemClickListener;
+import manju.shopify_mobile_application.parsers.Order;
+import manju.shopify_mobile_application.parsers.OrderResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 

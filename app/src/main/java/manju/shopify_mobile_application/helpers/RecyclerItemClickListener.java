@@ -1,4 +1,4 @@
-package manju.shopify_mobile_application.Helpers;
+package manju.shopify_mobile_application.helpers;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

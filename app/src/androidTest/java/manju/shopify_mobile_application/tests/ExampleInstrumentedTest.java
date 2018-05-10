@@ -1,4 +1,4 @@
-package manju.shopify_mobile_application;
+package manju.shopify_mobile_application.tests;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

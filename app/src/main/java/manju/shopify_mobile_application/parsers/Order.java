@@ -1,4 +1,4 @@
-package manju.shopify_mobile_application.Parsers;
+package manju.shopify_mobile_application.parsers;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
